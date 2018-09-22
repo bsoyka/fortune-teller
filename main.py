@@ -14,7 +14,7 @@ for color in pos_0:
 print("")
 user_input = None
 while user_input not in pos_0:
-    user_input = input("Choose an option above, type exactly as shown: ")
+    user_input = raw_input("Choose an option above, type exactly as shown: ")
 if fortune_helper.represents_int(user_input):
     amount_to_move = int(user_input)
 else:
@@ -34,10 +34,10 @@ print("")
 user_input = None
 if pos == 1:
     while user_input not in pos_1:
-        user_input = input("Choose an option above, type exactly as shown: ")
+        user_input = raw_input("Choose an option above, type exactly as shown: ")
 elif pos == 2:
     while user_input not in pos_2:
-        user_input = input("Choose an option above, type exactly as shown: ")
+        user_input = raw_input("Choose an option above, type exactly as shown: ")
 if fortune_helper.represents_int(user_input):
     amount_to_move = int(user_input)
 else:
@@ -57,11 +57,11 @@ print("")
 user_input = None
 if pos == 1:
     while user_input not in pos_1:
-        user_input = input("Choose an option above, type exactly as shown: ")
+        user_input = raw_input("Choose an option above, type exactly as shown: ")
     print("Your fortune is:")
     print(pos_1[user_input])
 elif pos == 2:
     while user_input not in pos_2:
-        user_input = input("Choose an option above, type exactly as shown: ")
+        user_input = raw_input("Choose an option above, type exactly as shown: ")
     print("Your fortune is:")
     print(pos_2[user_input])
