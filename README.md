@@ -1,3 +1,6 @@
 # fortune-teller
 ## installation
-To install, click [here](https://github.com/bsoyka/fortune-teller/releases/latest) and download the file ending in "py".  Then, simply run this file.
+To install, clone the repository or download the zip file from the releases page.  Then, run the following command in the directory of installation to install dependencies.
+```
+pip install -r requirements.txt
+```
