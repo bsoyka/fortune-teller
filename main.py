@@ -1,5 +1,19 @@
 import random
 import json
+import sentry_sdk
+import requests
+sentry_sdk.init(
+    "https://969f460f95a04fad9b1722ebdd9f1813@sentry.io/1297998",
+    environment = "prod",
+    send_default_pii = True,
+    release = "fortune-teller@1.2"
+)
+try:
+    user_ip = requests.get("https://api.ipify.org")
+except:
+    pass
+with sentry_sdk.configure_scope() as scope:
+    scope.user = {"ip_address": user_ip}
 
 
 def represents_int(string):
@@ -45,6 +59,8 @@ fortune_tellers = [[["Red","Yellow","Green","Blue"],{
                                                  "8":"There is a pox curse waiting for you in your future."
                                                 }]]
 fortune_teller_number = random.choice(range(len(fortune_tellers)))
+with sentry_sdk.configure_scope() as scope:
+    scope.set_tag("fortune_teller", fortune_teller_number)
 print("Fortune Teller #{}".format(fortune_teller_number + 1))
 fortune_teller = fortune_tellers[fortune_teller_number]
 pos_0 = fortune_teller[0]
@@ -62,6 +78,11 @@ while user_input not in pos_0:
             "Choose an option above, type exactly as shown: ")
     except NameError:
         user_input = input("Choose an option above, type exactly as shown: ")
+sentry_sdk.add_breadcrumb(
+    category = "user.action",
+    message = "User made choice for repetition 1, position 0",
+    level = "info"
+)
 if represents_int(user_input):
     amount_to_move = int(user_input)
 else:
@@ -87,6 +108,11 @@ if pos == 1:
         except NameError:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
+    sentry_sdk.add_breadcrumb(
+        category = "user.action",
+        message = "User made choice for repetition 2, position 1",
+        level = "info"
+    )
 elif pos == 2:
     while user_input not in pos_2:
         try:
@@ -95,6 +121,11 @@ elif pos == 2:
         except NameError:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
+    sentry_sdk.add_breadcrumb(
+        category = "user.action",
+        message = "User made choice for repetition 2, position 2",
+        level = "info"
+    )
 if represents_int(user_input):
     amount_to_move = int(user_input)
 else:
@@ -120,8 +151,18 @@ if pos == 1:
         except NameError:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
+    sentry_sdk.add_breadcrumb(
+        category = "user.action",
+        message = "User made choice for repetition 3, position 1",
+        level = "info"
+    )
     print("Your fortune is:")
     print(pos_1[user_input])
+    sentry_sdk.add_breadcrumb(
+        category = "output",
+        message = "Fortune told",
+        level = "info"
+    )
 elif pos == 2:
     while user_input not in pos_2:
         try:
@@ -130,5 +171,15 @@ elif pos == 2:
         except NameError:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
+    sentry_sdk.add_breadcrumb(
+        category = "user.action",
+        message = "User made choice for repetition 3, position 2",
+        level = "info"
+    )
     print("Your fortune is:")
     print(pos_2[user_input])
+    sentry_sdk.add_breadcrumb(
+        category = "output",
+        message = "Fortune told",
+        level = "info"
+    )
