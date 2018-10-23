@@ -6,7 +6,7 @@ sentry_sdk.init(
     "https://969f460f95a04fad9b1722ebdd9f1813@sentry.io/1297998",
     environment = "prod",
     send_default_pii = True,
-    release = "fortune-teller@1.2"
+    release = "fortune-teller@1.3.1"
 )
 try:
     user_ip = requests.get("https://api.ipify.org")
