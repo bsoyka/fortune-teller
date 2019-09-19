@@ -1,5 +1,4 @@
 import random
-import json
 import sentry_sdk
 import requests
 sentry_sdk.init(
