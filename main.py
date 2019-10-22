@@ -3,13 +3,13 @@ import sentry_sdk
 import requests
 sentry_sdk.init(
     "https://969f460f95a04fad9b1722ebdd9f1813@sentry.io/1297998",
-    environment = "prod",
-    send_default_pii = True,
-    release = "fortune-teller@1.3.1"
+    environment="prod",
+    send_default_pii=True,
+    release="fortune-teller@1.3.1"
 )
 try:
     user_ip = requests.get("https://api.ipify.org")
-except:
+except Exception:
     pass
 with sentry_sdk.configure_scope() as scope:
     scope.user = {"ip_address": user_ip}
@@ -30,33 +30,61 @@ def represents_int(string):
         return False
 
 
-fortune_tellers = [[["Red","Yellow","Green","Blue"],{
-    "1":"You will learn a lot today.",
-    "2":"Your shoes will make you happy today.",
-    "5":"You are very talented in many ways.",
-    "6":"It's better to be alone sometimes."},{
-    "3":"A dream you have will come true.",
-    "4":"Now is the time to learn something new.",
-    "7":"The man on top of the mountain did not fall there.",
-    "8":"Sometimes you just need to lay on the floor."}],[["Red","Yellow",
-                                                           "Green","Blue"],{
-    "1":"If you're happy, you're successful.",
-    "2":"You will always be surrounded by true friends.",
-    "5":"Conquer your fears or they will conquer you.",
-    "6":"Rivers need springs."},{
-    "3":"A lifetime of happiness is in store for you.",
-    "4":"Everything happens for a reason.",
-    "7":"The world may be your oyster, but that doesn't mean you'll get it's pearl.",
-    "8":"Do not fear what you don't know."}],[["Red","Yellow","Green","Blue"],
-                                              {"1":"Beware of bears bearing hugs.",
-                                               "2":"You will fall victim to a freak accident that gets featured on local news.",
-                                               "5":"Your carefully laid plans will be thwarted by a collection of crime-fighting hamsters.",
-                                               "6":"Santa Claus knows what you did.  You're relegated to The Naughty List."
-                                              },{"3":"Your next love interest has a hobby that you detest.  Good luck with that.",
-                                                 "4":"Before congratulating yourself for jumping 'out of the pan,' you'll soon find yourself 'in the fire.'",
-                                                 "7":"Yes, you will fall over in front of the person you have a massive crush on.",
-                                                 "8":"There is a pox curse waiting for you in your future."
-                                                }]]
+fortune_tellers = [
+  [
+    ["Red", "Yellow", "Green", "Blue"],
+    {
+      "1": "You will learn a lot today.",
+      "2": "Your shoes will make you happy today.",
+      "5": "You are very talented in many ways.",
+      "6": "It's better to be alone sometimes."
+    },
+    {
+      "3": "A dream you have will come true.",
+      "4": "Now is the time to learn something new.",
+      "7": "The man on top of the mountain did not fall there.",
+      "8": "Sometimes you just need to lay on the floor."
+    }
+  ],
+  [
+    ["Red", "Yellow", "Green", "Blue"],
+    {
+      "1": "If you're happy, you're successful.",
+      "2": "You will always be surrounded by true friends.",
+      "5": "Conquer your fears or they will conquer you.",
+      "6": "Rivers need springs."
+    },
+    {
+      "3": "A lifetime of happiness is in store for you.",
+      "4": "Everything happens for a reason.",
+      "7": ("The world may be your oyster, "
+            "but that doesn't mean you'll get it's pearl."),
+      "8": "Do not fear what you don't know."
+    }
+  ],
+  [
+    ["Red", "Yellow", "Green", "Blue"],
+    {
+      "1": "Beware of bears bearing hugs.",
+      "2": ("You will fall victim to a freak "
+            "accident that gets featured on local news."),
+      "5": ("Your carefully laid plans will be "
+            "thwarted by a collection of crime-fighting hamsters."),
+      "6": ("Santa Claus knows what you did.  "
+            "You're relegated to The Naughty List.")
+    },
+    {
+      "3": ("Your next love interest has a "
+            "hobby that you detest.  Good luck with that."),
+      "4": ("Before congratulating yourself for jumping "
+            "'out of the pan,' you'll soon find yourself 'in the fire.'"),
+      "7": ("Yes, you will fall over in front of the "
+            "person you have a massive crush on."),
+      "8": "There is a pox curse waiting for you in your future."
+    }
+  ]
+]
+
 fortune_teller_number = random.choice(range(len(fortune_tellers)))
 with sentry_sdk.configure_scope() as scope:
     scope.set_tag("fortune_teller", fortune_teller_number)
@@ -78,9 +106,9 @@ while user_input not in pos_0:
     except NameError:
         user_input = input("Choose an option above, type exactly as shown: ")
 sentry_sdk.add_breadcrumb(
-    category = "user.action",
-    message = "User made choice for repetition 1, position 0",
-    level = "info"
+    category="user.action",
+    message="User made choice for repetition 1, position 0",
+    level="info"
 )
 if represents_int(user_input):
     amount_to_move = int(user_input)
@@ -108,9 +136,9 @@ if pos == 1:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
     sentry_sdk.add_breadcrumb(
-        category = "user.action",
-        message = "User made choice for repetition 2, position 1",
-        level = "info"
+        category="user.action",
+        message="User made choice for repetition 2, position 1",
+        level="info"
     )
 elif pos == 2:
     while user_input not in pos_2:
@@ -121,9 +149,9 @@ elif pos == 2:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
     sentry_sdk.add_breadcrumb(
-        category = "user.action",
-        message = "User made choice for repetition 2, position 2",
-        level = "info"
+        category="user.action",
+        message="User made choice for repetition 2, position 2",
+        level="info"
     )
 if represents_int(user_input):
     amount_to_move = int(user_input)
@@ -151,16 +179,16 @@ if pos == 1:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
     sentry_sdk.add_breadcrumb(
-        category = "user.action",
-        message = "User made choice for repetition 3, position 1",
-        level = "info"
+        category="user.action",
+        message="User made choice for repetition 3, position 1",
+        level="info"
     )
     print("Your fortune is:")
     print(pos_1[user_input])
     sentry_sdk.add_breadcrumb(
-        category = "output",
-        message = "Fortune told",
-        level = "info"
+        category="output",
+        message="Fortune told",
+        level="info"
     )
 elif pos == 2:
     while user_input not in pos_2:
@@ -171,14 +199,14 @@ elif pos == 2:
             user_input = input(
                 "Choose an option above, type exactly as shown: ")
     sentry_sdk.add_breadcrumb(
-        category = "user.action",
-        message = "User made choice for repetition 3, position 2",
-        level = "info"
+        category="user.action",
+        message="User made choice for repetition 3, position 2",
+        level="info"
     )
     print("Your fortune is:")
     print(pos_2[user_input])
     sentry_sdk.add_breadcrumb(
-        category = "output",
-        message = "Fortune told",
-        level = "info"
+        category="output",
+        message="Fortune told",
+        level="info"
     )
