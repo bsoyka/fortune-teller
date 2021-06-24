@@ -11,4 +11,5 @@ $ python -m pip install -r requirements.txt
 
 ## Usage
 
-Just run the `main.py` file and follow the instructions to receive your fortune.
+Just run the `main.py` file and follow the instructions to receive your
+fortune.
