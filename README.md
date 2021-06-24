@@ -1,10 +1,14 @@
-# fortune-teller
+# Fortune Teller
 
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=bsoyka/fortune-teller)](https://dependabot.com)
-![Sentry Badge](https://img.shields.io/badge/sentry-reporting%20errors-493d54.svg)
+## Installation
 
-## installation
-To install, clone the repository or download the zip file from the releases page.  Then, run the following command in the directory of installation to install dependencies.
+To install, clone the repository or download the zip file from the releases
+page. Then, run the following command to install dependencies:
+
+```sh
+$ python -m pip install -r requirements.txt
 ```
-pip install -r requirements.txt
-```
+
+## Usage
+
+Just run the `main.py` file and follow the instructions to receive your fortune.
